@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rusça Seviye Belirleme Testi</title>
+  <meta name="description" content="Rusça dil seviyesi belirleme testi (A1–C2). Tek sayfa, mobil uyumlu." />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#101a2e;
+      --card2:#0f1730;
+      --text:#e9eefc;
+      --muted:#b9c3df;
+      --brand:#7c5cff;
+      --brand2:#00d3a7;
+      --warn:#ffcc66;
+      --bad:#ff5c7a;
+      --good:#36d399;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:14px;
+      --max: 980px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:var(--font); color:var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(124,92,255,.35), transparent 55%),
+        radial-gradient(900px 500px at 85% 15%, rgba(0,211,167,.22), transparent 55%),
+        radial-gradient(900px 700px at 35% 95%, rgba(255,204,102,.18), transparent 60%),
+        var(--bg);
+      min-height:100vh;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 16px 46px}
+    header{
+      display:flex; gap:14px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width:260px;
+    }
+    .logo{
+      width:44px; height:44px; border-radius:14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 10px 25px rgba(124,92,255,.22);
+      display:grid; place-items:center; font-weight:900;
+      letter-spacing:.5px;
+    }
+    .title h1{font-size:18px; margin:0 0 2px}
+    .title p{margin:0; color:var(--muted); font-size:13px; line-height:1.35}
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .pill{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      padding:8px 10px; border-radius:999px;
+      font-size:12px; color:var(--muted);
+      display:flex; gap:8px; align-items:center;
+    }
+    .dot{width:8px; height:8px; border-radius:50%}
+    .dot.green{background:var(--good)}
+    .dot.purple{background:var(--brand)}
+    .dot.teal{background:var(--brand2)}
+    main{margin-top:10px}
+    .grid{
+      display:grid; grid-template-columns: 1.2fr .8fr; gap:14px;
+    }
+    @media (max-width: 920px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding:16px 16px 12px;
+      border-bottom:1px solid var(--line);
+      display:flex; justify-content:space-between; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+    .card .hd h2{margin:0; font-size:15px}
+    .card .hd small{color:var(--muted)}
+    .card .bd{padding:16px}
+    .muted{color:var(--muted)}
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      appearance:none; border:1px solid transparent;
+      padding:10px 12px; border-radius:14px;
+      background: rgba(255,255,255,.07);
+      color:var(--text); cursor:pointer;
+      font-weight:650; font-size:13px;
+      transition:.15s transform, .15s filter, .15s background;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{filter:brightness(1.08)}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{
+      background: linear-gradient(135deg, var(--brand), rgba(124,92,255,.55));
+      border-color: rgba(124,92,255,.35);
+    }
+    .btn.good{
+      background: linear-gradient(135deg, var(--brand2), rgba(0,211,167,.55));
+      border-color: rgba(0,211,167,.35);
+    }
+    .btn.warn{
+      background: linear-gradient(135deg, var(--warn), rgba(255,204,102,.45));
+      color:#1a1a1a;
+    }
+    .btn.ghost{
+      background: transparent;
+      border-color: var(--line);
+    }
+    .btn[disabled]{opacity:.55; cursor:not-allowed; transform:none}
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12px; padding:2px 6px; border-radius:8px;
+      background: rgba(255,255,255,.08); border:1px solid var(--line);
+      color: var(--text);
+    }
+
+    .progress{
+      height:10px; background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      border-radius:999px; overflow:hidden;
+    }
+    .bar{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, var(--brand), var(--brand2));
+      transition: width .25s ease;
+    }
+
+    .qwrap{display:flex; flex-direction:column; gap:12px}
+    .q{
+      border:1px solid var(--line);
+      background: rgba(16,26,46,.55);
+      border-radius: var(--radius2);
+      padding:12px;
+    }
+    .qtop{display:flex; justify-content:space-between; gap:10px; align-items:flex-start; flex-wrap:wrap}
+    .qtitle{margin:0; font-size:13.5px; line-height:1.35}
+    .qmeta{color:var(--muted); font-size:12px; white-space:nowrap}
+    .opt{margin-top:10px; display:grid; gap:8px}
+    label.choice{
+      display:flex; gap:10px; align-items:flex-start;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: 14px;
+      padding:9px 10px;
+      cursor:pointer;
+      transition:.12s background, .12s transform, .12s border-color;
+    }
+    label.choice:hover{background: rgba(255,255,255,.06)}
+    label.choice:active{transform: translateY(1px)}
+    input[type="radio"]{margin-top:2px}
+
+    .sidebox{display:flex; flex-direction:column; gap:12px}
+    .stat{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 12px; border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+    }
+    .stat b{font-size:13px}
+    .stat span{color:var(--muted); font-size:12.5px}
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      border-radius:999px; padding:6px 10px;
+      font-size:12px; font-weight:700;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+    }
+    .tag .mini{width:9px;height:9px;border-radius:50%}
+    .mini.a1{background:#7dd3fc}
+    .mini.a2{background:#a7f3d0}
+    .mini.b1{background:#fcd34d}
+    .mini.b2{background:#fb7185}
+    .mini.c1{background:#c4b5fd}
+    .mini.c2{background:#34d399}
+
+    .notice{
+      border:1px dashed rgba(255,255,255,.25);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding:12px;
+      color: var(--muted);
+      font-size:12.8px;
+      line-height:1.45;
+    }
+
+    .resultBox{
+      padding:16px;
+      border-radius: 18px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(124,92,255,.12), rgba(0,211,167,.10));
+    }
+    .resultTop{display:flex; justify-content:space-between; gap:12px; align-items:flex-start; flex-wrap:wrap}
+    .levelBig{
+      font-size:34px; font-weight:900; letter-spacing:.6px; margin:0;
+    }
+    .scoreBig{margin:6px 0 0; color:var(--muted); font-weight:700}
+    .badge{
+      align-self:flex-start;
+      border-radius:999px;
+      padding:8px 10px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      font-weight:800;
+      font-size:12px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .badge .dot{width:10px;height:10px}
+    .list{margin:10px 0 0; padding-left:18px; color:var(--muted); font-size:13px; line-height:1.5}
+    .hr{height:1px; background: var(--line); margin:14px 0}
+    footer{margin-top:16px; color:var(--muted); font-size:12px; text-align:center}
+    .hidden{display:none !important}
+    .sr{position:absolute; left:-9999px}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">RU</div>
+        <div class="title">
+          <h1>Rusça Seviye Belirleme (A1–C2)</h1>
+          <p>Tek sayfa test • Mobil uyumlu • Sonuç ekranını görsel olarak indirebilirsiniz</p>
+        </div>
+      </div>
+      <div class="pillrow">
+        <div class="pill"><span class="dot purple"></span>Toplam: <b id="pillTotal">—</b> soru</div>
+        <div class="pill"><span class="dot teal"></span>Gerekli: <b>hepsini</b> yanıtla</div>
+        <div class="pill"><span class="dot green"></span>Sonuç: <b>A1–C2</b></div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- Left: Main -->
+      <section class="card" id="cardMain">
+        <div class="hd">
+          <div>
+            <h2 id="modeTitle">Başlamadan önce</h2>
+            <small class="muted" id="modeHint">Adınızı yazın ve teste başlayın.</small>
+          </div>
+          <div style="min-width:220px; flex:1; max-width:360px">
+            <div class="progress" aria-label="İlerleme">
+              <div class="bar" id="bar"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:12px; color:var(--muted)">
+              <span id="progText">0%</span>
+              <span><span id="answered">0</span>/<span id="total">0</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bd">
+          <!-- Intro -->
+          <div id="viewIntro">
+            <div class="notice">
+              <b>Öğrenciye not:</b> Lütfen dış kaynak kullanmadan çöz. Test bittiğinde <b>Sonuç ekranının ekran görüntüsünü</b>
+              öğretmenine gönder veya alttaki <b>“Sonucu Görsel Olarak İndir”</b> butonunu kullan.
+            </div>
+
+            <div style="display:grid; gap:12px; margin-top:14px">
+              <div class="q">
+                <div class="qtop">
+                  <p class="qtitle"><b>Ad Soyad</b> (sonuçta görünecek):</p>
+                </div>
+                <div class="opt">
+                  <input id="studentName" type="text" placeholder="Örn: Ayşe Yılmaz" style="width:100%; padding:10px 12px; border-radius:14px; border:1px solid var(--line); background: rgba(255,255,255,.04); color:var(--text); outline:none" />
+                </div>
+              </div>
+
+              <div class="q">
+                <div class="qtop">
+                  <p class="qtitle"><b>Test ayarı</b></p>
+                </div>
+                <div class="opt" style="grid-template-columns:1fr; gap:10px">
+                  <label class="choice">
+                    <input type="radio" name="difficulty" value="mixed" checked />
+                    <div>
+                      <div><b>Karışık (Önerilen)</b></div>
+                      <div class="muted" style="font-size:12px">A1’den C2’ye kadar soru dağılımı — doğru seviye için en iyisi.</div>
+                    </div>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="difficulty" value="quick" />
+                    <div>
+                      <div><b>Hızlı</b></div>
+                      <div class="muted" style="font-size:12px">Daha az soru (daha hızlı) — yaklaşık seviye verir.</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="btnrow">
+                <button class="btn primary" id="btnStart">Teste Başla</button>
+                <button class="btn ghost" id="btnDemoFill" title="Öğretmen için: örnek doldurur">Demo Doldur</button>
+              </div>
+
+              <div class="muted" style="font-size:12.5px">
+                İpucu: Öğrencilerinizin size görsel göndermesi için “Testi bitirince <span class="kbd">Sonuç ekranının</span> ekran görüntüsünü gönder.” diyebilirsiniz.
+              </div>
+            </div>
+          </div>
+
+          <!-- Quiz -->
+          <div id="viewQuiz" class="hidden">
+            <div class="qwrap" id="qwrap"></div>
+
+            <div class="hr"></div>
+            <div class="btnrow">
+              <button class="btn ghost" id="btnReset">Sıfırla</button>
+              <button class="btn primary" id="btnFinish" disabled>Testi Bitir</button>
+            </div>
+            <p class="muted" style="font-size:12.5px; margin:10px 0 0">
+              Not: Tüm soruları yanıtlayınca “Testi Bitir” aktif olur.
+            </p>
+          </div>
+
+          <!-- Result -->
+          <div id="viewResult" class="hidden">
+            <div id="resultCapture" class="resultBox">
+              <div class="resultTop">
+                <div>
+                  <p class="muted" style="margin:0; font-weight:700" id="resName">Öğrenci: —</p>
+                  <h3 class="levelBig" id="resLevel">—</h3>
+                  <p class="scoreBig" id="resScore">Puan: —</p>
+                </div>
+                <div class="badge" id="resBadge">
+                  <span class="dot green"></span>
+                  <span id="resBadgeText">—</span>
+                </div>
+              </div>
+
+              <div class="hr"></div>
+
+              <div style="display:grid; gap:10px">
+                <div class="stat">
+                  <b>Doğru Sayısı</b>
+                  <span><span id="resCorrect">0</span> / <span id="resTotal">0</span></span>
+                </div>
+                <div class="stat">
+                  <b>Seviye Güveni</b>
+                  <span id="resConfidence">—</span>
+                </div>
+                <div class="stat">
+                  <b>Önerilen Çalışma Odağı</b>
+                  <span id="resFocus">—</span>
+                </div>
+              </div>
+
+              <p class="muted" style="margin:12px 0 0; font-size:12.5px">
+                Bu test hızlı ölçüm amaçlıdır; konuşma-yazma üretimi gibi beceriler için öğretmen değerlendirmesi önerilir.
+              </p>
+
+              <ul class="list" id="resTips"></ul>
+            </div>
+
+            <div class="hr"></div>
+
+            <div class="btnrow">
+              <button class="btn good" id="btnDownloadImg">Sonucu Görsel Olarak İndir (PNG)</button>
+              <button class="btn warn" id="btnCopyText">Sonucu Metin Olarak Kopyala</button>
+              <button class="btn ghost" id="btnAgain">Yeni Test</button>
+            </div>
+
+            <div class="notice" style="margin-top:12px">
+              <b>Öğrenciye gönderilecek mesaj örneği:</b><br/>
+              “Testi bitirince <b>Sonuç ekranının</b> ekran görüntüsünü bana gönder ya da <b>PNG indir</b> butonuyla indirip yolla.”
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Side -->
+      <aside class="card">
+        <div class="hd">
+          <div>
+            <h2>Seviye açıklaması</h2>
+            <small class="muted">Puan → A1–C2 dönüşümü</small>
+          </div>
+        </div>
+        <div class="bd sidebox">
+          <div class="tag"><span class="mini a1"></span> A1 • Temel tanışma, basit cümle</div>
+          <div class="tag"><span class="mini a2"></span> A2 • Günlük ifadeler, basit geçmiş</div>
+          <div class="tag"><span class="mini b1"></span> B1 • Bağlaçlar, anlatım, metin anlama</div>
+          <div class="tag"><span class="mini b2"></span> B2 • Karmaşık yapılar, akıcılık</div>
+          <div class="tag"><span class="mini c1"></span> C1 • Akademik/soyut dil, nüans</div>
+          <div class="tag"><span class="mini c2"></span> C2 • Anadile yakın kullanım</div>
+
+          <div class="hr"></div>
+
+          <div class="stat">
+            <b>Test İçeriği</b>
+            <span>Kelime • Dilbilgisi • Okuma</span>
+          </div>
+          <div class="stat">
+            <b>Gizlilik</b>
+            <span>Veri kaydetmez (lokal)</span>
+          </div>
+
+          <div class="notice">
+            <b>Öğretmen ipucu:</b> Linki öğrencilerinize atınca, sonuçları kanıtlamak için “PNG indir” özelliği
+            daha tutarlı sonuç toplamanıza yardımcı olur.
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      © Tek sayfa Rusça seviye testi • Öğretmen kullanımına uygun • Offline veri toplamaz
+    </footer>
+  </div>
+
+  <!-- html2canvas (tek dosya kalması için CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" crossorigin="anonymous"></script>
+
+  <script>
+    // =========================
+    // Question Bank (A1–C2)
+    // =========================
+    const BANK = [
+      // A1
+      {id:"a1_1", lvl:"A1", type:"grammar", q:"“Меня зовут …” cümlesinin Türkçesi hangisi?", a:["Benim adım …","Ben … yaşıyorum","Ben … seviyorum","Ben … çalışıyorum"], c:0},
+      {id:"a1_2", lvl:"A1", type:"vocab", q:"“Спасибо” ne demek?", a:["Merhaba","Teşekkürler","Lütfen","Hoşça kal"], c:1},
+      {id:"a1_3", lvl:"A1", type:"grammar", q:"“Я ___ студент.” boşluğa hangisi gelir?", a:["есть","— (hiçbiri)","быть","это"], c:1},
+      {id:"a1_4", lvl:"A1", type:"vocab", q:"“Книга” ne demek?", a:["Kalem","Kitap","Masa","Okul"], c:1},
+
+      // A2
+      {id:"a2_1", lvl:"A2", type:"grammar", q:"“У меня есть брат.” cümlesinin anlamı hangisi?", a:["Benim bir erkek kardeşim var.","Benim bir ablam var.","Benim bir oğlum var.","Benim bir arkadaşım var."], c:0},
+      {id:"a2_2", lvl:"A2", type:"grammar", q:"Geçmiş zamanda “вчера я ___ дома” (dün evdeydim):", a:["был/была","есть","буду","бываю"], c:0},
+      {id:"a2_3", lvl:"A2", type:"vocab", q:"“Потому что” ne demek?", a:["Bu yüzden","Çünkü","Fakat","Ne zaman"], c:1},
+      {id:"a2_4", lvl:"A2", type:"grammar", q:"“Я иду ___ школу.” boşluğa hangisi gelir?", a:["в","на","к","из"], c:0},
+
+      // B1
+      {id:"b1_1", lvl:"B1", type:"grammar", q:"“Я интересуюсь ___ музыкой.” boşluğa hangisi gelir?", a:["классическая","классической","классическую","классическом"], c:1},
+      {id:"b1_2", lvl:"B1", type:"reading", q:"Okuma: “Он хотел купить билет, но касса уже закрылась.” Burada problem nedir?", a:["Bilet pahalıydı","Gişe kapanmıştı","Tren iptal oldu","Yanlış perona gitti"], c:1},
+      {id:"b1_3", lvl:"B1", type:"grammar", q:"“Если будет время, я ___.” doğru tamamla:", a:["приду","пришёл","приходил","приду бы"], c:0},
+      {id:"b1_4", lvl:"B1", type:"vocab", q:"“Сначала …, потом …” ifadesi hangi anlama gelir?", a:["Birdenbire","Önce … sonra …","Her zaman","Nadiren"], c:1},
+
+      // B2
+      {id:"b2_1", lvl:"B2", type:"grammar", q:"“Несмотря на дождь, мы ___ гулять.” boşluk:", a:["пошли","пойдём","ходим","ходили бы"], c:0},
+      {id:"b2_2", lvl:"B2", type:"grammar", q:"“Мне сказали, что он уже ___.” boşluk:", a:["приходит","пришёл","придёт","приходил"], c:1},
+      {id:"b2_3", lvl:"B2", type:"reading", q:"Okuma: “Чем больше я читаю, тем лучше понимаю.” Cümle ne anlatır?", a:["Az okursa daha iyi anlar","Okudukça daha iyi anlıyor","Okumayı bıraktı","Anlamadığı için okumuyor"], c:1},
+      {id:"b2_4", lvl:"B2", type:"vocab", q:"“Возможно” ne demek?", a:["Kesinlikle","Muhtemelen","Asla","Hemen"], c:1},
+
+      // C1
+      {id:"c1_1", lvl:"C1", type:"grammar", q:"“Едва он ___, как все замолчали.” boşluk:", a:["входит","вошёл","войдёт","входил"], c:1},
+      {id:"c1_2", lvl:"C1", type:"vocab", q:"“Следовательно” en yakın anlam:", a:["Bu arada","Sonuç olarak","Neredeyse","Rastgele"], c:1},
+      {id:"c1_3", lvl:"C1", type:"grammar", q:"Doğru vurgu (ударение) hangisi?", a:["катАлог","кАталог","каталОг","кАтАлог"], c:0},
+      {id:"c1_4", lvl:"C1", type:"reading", q:"Okuma: “Его доводы выглядят убедительно, однако остаются вопросы.” Ton nasıl?", a:["Tamamen onaylıyor","Şüphe var / çekince var","Öfke var","Alay ediyor"], c:1},
+
+      // C2
+      {id:"c2_1", lvl:"C2", type:"grammar", q:"“Он говорил так, будто ___ всё это раньше.” boşluk:", a:["видит","увидел","видел","увидит"], c:2},
+      {id:"c2_2", lvl:"C2", type:"vocab", q:"“Сущность вопроса” ifadesi neye yakındır?", a:["Soruya giriş","Sorunun özü","Sorunun sonu","Soruyu tekrar"], c:1},
+      {id:"c2_3", lvl:"C2", type:"reading", q:"Okuma: “Не то чтобы я был против, просто предпочёл бы другой вариант.” Ne demek istiyor?", a:["Kesinlikle karşı","Karşı değil ama başka tercih eder","Hiç fikri yok","Mecbur kalmış"], c:1},
+      {id:"c2_4", lvl:"C2", type:"grammar", q:"“Куда ни ___, везде одно и то же.” boşluk:", a:["пойду","шёл","ходил","пойду бы"], c:0},
+    ];
+
+    // =========================
+    // Helpers
+    // =========================
+    const $ = (s)=>document.querySelector(s);
+    const $$ = (s)=>Array.from(document.querySelectorAll(s));
+    const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
+
+    const LEVEL_ORDER = ["A1","A2","B1","B2","C1","C2"];
+
+    function pickQuestions(mode){
+      // mixed: 18 soru (3'er tane A1..C2)
+      // quick: 12 soru (2'şer tane A1..C2)
+      const perLevel = (mode === "quick") ? 2 : 3;
+      const chosen = [];
+      for(const L of LEVEL_ORDER){
+        const pool = BANK.filter(x => x.lvl === L);
+        shuffle(pool);
+        chosen.push(...pool.slice(0, perLevel));
+      }
+      shuffle(chosen);
+      return chosen;
+    }
+
+    function shuffle(arr){
+      for(let i=arr.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [arr[i],arr[j]]=[arr[j],arr[i]];
+      }
+      return arr;
+    }
+
+    function scoreToLevel(pct){
+      // pct: 0..100
+      // Eşikler (pratik):
+      // <25 A1, <40 A2, <55 B1, <70 B2, <85 C1, >=85 C2
+      if(pct < 25) return "A1";
+      if(pct < 40) return "A2";
+      if(pct < 55) return "B1";
+      if(pct < 70) return "B2";
+      if(pct < 85) return "C1";
+      return "C2";
+    }
+
+    function confidenceText(total, correct){
+      // basit güven ölçütü: örneklem ve fark
+      const pct = (correct/total)*100;
+      const spread = Math.abs(pct - 50);
+      let base = total >= 18 ? 2 : 1;
+      if(spread >= 25) base += 1;
+      if(spread >= 35) base += 1;
+      base = clamp(base,1,4);
+      return ["Düşük","Orta","İyi","Yüksek"][base-1];
+    }
+
+    function focusFromWeakness(weakType){
+      if(weakType === "grammar") return "Dilbilgisi (çekimler, zamanlar, bağlaçlar)";
+      if(weakType === "vocab") return "Kelime (günlük + akademik kelime havuzu)";
+      if(weakType === "reading") return "Okuma-anlama (kısa metin + bağlam çıkarımı)";
+      return "Genel tekrar (karma pratik)";
+    }
+
+    function badgeFor(level){
+      const map = {
+        A1:{color:"green", text:"Temel başlangıç"},
+        A2:{color:"teal", text:"Temel kullanıcı"},
+        B1:{color:"warn", text:"Orta seviye (eşik)"},
+        B2:{color:"purple", text:"İleri orta"},
+        C1:{color:"teal", text:"İleri seviye"},
+        C2:{color:"green", text:"Neredeyse anadil"}
+      };
+      return map[level] || {color:"green", text:"—"};
+    }
+
+    function tipsFor(level){
+      const tips = {
+        A1:[
+          "Günlük 10–15 temel kalıp: selamlaşma, tanışma, yön sorma.",
+          "Alfabe + okuma: kısa kelimelerle hız kazan.",
+          "Basit cümle: “Я …”, “У меня есть …”, “Мне нравится …”."
+        ],
+        A2:[
+          "Geçmiş zaman (был/была) ve hareket fiilleri (идти/ехать) pratiği.",
+          "Soru kalıpları: “Когда?”, “Почему?”, “Сколько?”.",
+          "Kısa diyaloglar: alışveriş, kafe, yol tarifi."
+        ],
+        B1:[
+          "Hâl çekimleri: -ом/-ой, -у/-ю, -е vb. (en çok karışanlar).",
+          "Bağlaçlarla anlatım: потому что, поэтому, если…",
+          "Kısa haber/köşe yazısı okuyup 3 cümle özet çıkar."
+        ],
+        B2:[
+          "Karmaşık cümle: уступка (несмотря на…), şart, neden-sonuç.",
+          "Duyduğunu-yazdığını yeniden ifade et (paraphrase).",
+          "Daha uzun metinlerde ana fikir + detay ayrımı."
+        ],
+        C1:[
+          "Üslup/nüans: однако, тем не менее, следовательно…",
+          "Vurgu (ударение) ve akıcılık için gölge okuma (shadowing).",
+          "Akademik konularda tartışma: artı/eksi argüman listeleri."
+        ],
+        C2:[
+          "İdiomatik kullanım: kalıp ifadeler ve deyimler.",
+          "Stil çeşitliliği: resmi/gayriresmi ton arasında geçiş.",
+          "Uzun metin analizi: ima, alt metin, ironi."
+        ]
+      };
+      return tips[level] || ["Genel pratik yap."];
+    }
+
+    // =========================
+    // App State
+    // =========================
+    let QUESTIONS = [];
+    let answers = new Map(); // qid -> index
+    let studentName = "";
+
+    function setView(which){
+      $("#viewIntro").classList.toggle("hidden", which !== "intro");
+      $("#viewQuiz").classList.toggle("hidden", which !== "quiz");
+      $("#viewResult").classList.toggle("hidden", which !== "result");
+
+      if(which === "intro"){
+        $("#modeTitle").textContent = "Başlamadan önce";
+        $("#modeHint").textContent = "Adınızı yazın ve teste başlayın.";
+      }else if(which === "quiz"){
+        $("#modeTitle").textContent = "Test";
+        $("#modeHint").textContent = "Tüm soruları yanıtlayın, sonra bitirin.";
+      }else{
+        $("#modeTitle").textContent = "Sonuç";
+        $("#modeHint").textContent = "Sonuç ekranını görsel olarak indirip paylaşabilirsiniz.";
+      }
+    }
+
+    function renderQuestions(){
+      const wrap = $("#qwrap");
+      wrap.innerHTML = "";
+      QUESTIONS.forEach((q, idx)=>{
+        const el = document.createElement("div");
+        el.className = "q";
+        el.innerHTML = `
+          <div class="qtop">
+            <p class="qtitle"><b>${idx+1}.</b> ${escapeHtml(q.q)}</p>
+            <div class="qmeta">${q.lvl} • ${labelTypeTR(q.type)}</div>
+          </div>
+          <div class="opt">
+            ${q.a.map((opt, oi)=>`
+              <label class="choice">
+                <input type="radio" name="q_${q.id}" value="${oi}" />
+                <div>${escapeHtml(opt)}</div>
+              </label>
+            `).join("")}
+          </div>
+        `;
+        wrap.appendChild(el);
+
+        // restore
+        const stored = answers.get(q.id);
+        if(stored !== undefined){
+          const r = el.querySelector(`input[type="radio"][value="${stored}"]`);
+          if(r) r.checked = true;
+        }
+
+        // bind
+        el.querySelectorAll(`input[name="q_${q.id}"]`).forEach(r=>{
+          r.addEventListener("change", ()=>{
+            answers.set(q.id, Number(r.value));
+            updateProgress();
+          });
+        });
+      });
+
+      $("#total").textContent = String(QUESTIONS.length);
+      $("#pillTotal").textContent = String(QUESTIONS.length);
+      updateProgress();
+    }
+
+    function updateProgress(){
+      const total = QUESTIONS.length;
+      const ans = answers.size;
+      $("#answered").textContent = String(ans);
+      const pct = total ? Math.round((ans/total)*100) : 0;
+      $("#progText").textContent = pct + "%";
+      $("#bar").style.width = pct + "%";
+      $("#btnFinish").disabled = (ans !== total);
+    }
+
+    function labelTypeTR(t){
+      return ({grammar:"Dilbilgisi", vocab:"Kelime", reading:"Okuma"})[t] || "Genel";
+    }
+
+    function escapeHtml(s){
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function computeResult(){
+      let correct = 0;
+      const wrongByType = {grammar:0, vocab:0, reading:0};
+      const total = QUESTIONS.length;
+
+      QUESTIONS.forEach(q=>{
+        const pick = answers.get(q.id);
+        if(pick === q.c) correct++;
+        else wrongByType[q.type] = (wrongByType[q.type]||0) + 1;
+      });
+
+      const pct = total ? (correct/total)*100 : 0;
+      const level = scoreToLevel(pct);
+
+      // en zayıf alan
+      let weakType = "grammar";
+      let maxWrong = -1;
+      for(const k of Object.keys(wrongByType)){
+        if(wrongByType[k] > maxWrong){
+          maxWrong = wrongByType[k];
+          weakType = k;
+        }
+      }
+
+      return {
+        correct, total, pct, level,
+        confidence: confidenceText(total, correct),
+        focus: focusFromWeakness(weakType),
+        wrongByType
+      };
+    }
+
+    function showResult(){
+      const res = computeResult();
+      const name = (studentName || "—").trim();
+      const b = badgeFor(res.level);
+
+      $("#resName").textContent = "Öğrenci: " + name;
+      $("#resLevel").textContent = res.level;
+      $("#resScore").textContent = `Puan: ${Math.round(res.pct)}%`;
+
+      $("#resCorrect").textContent = String(res.correct);
+      $("#resTotal").textContent = String(res.total);
+      $("#resConfidence").textContent = res.confidence;
+      $("#resFocus").textContent = res.focus;
+
+      $("#resBadgeText").textContent = b.text;
+      // badge dot color tweak
+      const dot = $("#resBadge").querySelector(".dot");
+      dot.className = "dot " + (b.color === "warn" ? "" : b.color);
+      if(b.color === "warn"){
+        dot.style.background = "var(--warn)";
+      }else{
+        dot.style.background = "";
+      }
+
+      const tips = tipsFor(res.level);
+      $("#resTips").innerHTML = tips.map(x=>`<li>${escapeHtml(x)}</li>`).join("");
+
+      setView("result");
+      $("#bar").style.width = "100%";
+      $("#progText").textContent = "100%";
+    }
+
+    async function downloadResultAsImage(){
+      const node = $("#resultCapture");
+      // Scroll to top of result for consistent capture
+      node.scrollIntoView({behavior:"smooth", block:"start"});
+      await new Promise(r=>setTimeout(r, 250));
+
+      const canvas = await html2canvas(node, {
+        backgroundColor: null,
+        scale: Math.min(2, window.devicePixelRatio || 1),
+        useCORS: true
+      });
+
+      const a = document.createElement("a");
+      const safeName = (studentName || "sonuc").trim().replace(/[^\p{L}\p{N}\-_ ]/gu,"").replace(/\s+/g,"_");
+      a.download = `rusca_seviye_sonucu_${safeName || "ogrenci"}.png`;
+      a.href = canvas.toDataURL("image/png");
+      a.click();
+    }
+
+    async function copyResultText(){
+      const res = computeResult();
+      const name = (studentName || "—").trim();
+      const text =
+`Rusça Seviye Sonucu
+Öğrenci: ${name}
+Seviye: ${res.level}
+Puan: ${Math.round(res.pct)}% (${res.correct}/${res.total})
+Seviye Güveni: ${res.confidence}
+Önerilen Odak: ${res.focus}`;
+      try{
+        await navigator.clipboard.writeText(text);
+        alert("Sonuç metni panoya kopyalandı.");
+      }catch(e){
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        alert("Sonuç metni panoya kopyalandı.");
+      }
+    }
+
+    function resetAll(){
+      QUESTIONS = [];
+      answers = new Map();
+      studentName = "";
+      $("#studentName").value = "";
+      $("#bar").style.width = "0%";
+      $("#progText").textContent = "0%";
+      $("#answered").textContent = "0";
+      $("#total").textContent = "0";
+      $("#pillTotal").textContent = "—";
+      setView("intro");
+    }
+
+    // =========================
+    // Events
+    // =========================
+    $("#btnStart").addEventListener("click", ()=>{
+      studentName = $("#studentName").value.trim();
+
+      const mode = ($$('input[name="difficulty"]').find(x=>x.checked)?.value) || "mixed";
+      QUESTIONS = pickQuestions(mode);
+      answers = new Map();
+
+      setView("quiz");
+      renderQuestions();
+
+      // jump to top for mobile
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+
+    $("#btnFinish").addEventListener("click", ()=>{
+      showResult();
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+
+    $("#btnReset").addEventListener("click", ()=>{
+      if(confirm("Test sıfırlansın mı?")){
+        // keep name
+        answers = new Map();
+        renderQuestions();
+        window.scrollTo({top:0, behavior:"smooth"});
+      }
+    });
+
+    $("#btnAgain").addEventListener("click", ()=>{
+      // keep name but new questions
+      const mode = ($$('input[name="difficulty"]').find(x=>x.checked)?.value) || "mixed";
+      QUESTIONS = pickQuestions(mode);
+      answers = new Map();
+      setView("quiz");
+      renderQuestions();
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+
+    $("#btnDownloadImg").addEventListener("click", async ()=>{
+      try{
+        await downloadResultAsImage();
+      }catch(e){
+        alert("Görsel oluşturulamadı. Tarayıcı izinlerini kontrol edin veya ekran görüntüsü alın.");
+      }
+    });
+
+    $("#btnCopyText").addEventListener("click", copyResultText);
+
+    $("#btnDemoFill").addEventListener("click", ()=>{
+      $("#studentName").value = "Demo Öğrenci";
+      // hızlı başlat
+      const mode = "quick";
+      $$('input[name="difficulty"]').forEach(r=>r.checked = (r.value===mode));
+      $("#btnStart").click();
+
+      // rastgele işaretle (demo)
+      QUESTIONS.forEach(q=>{
+        const pick = Math.floor(Math.random()*q.a.length);
+        answers.set(q.id, pick);
+      });
+      renderQuestions();
+    });
+
+    // boot
+    resetAll();
+  </script>
+</body>
+</html>
